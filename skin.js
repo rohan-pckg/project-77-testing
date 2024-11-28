@@ -3489,44 +3489,39 @@ function pano2vrSkin(player, base) {
       }
     };
     me._hs.onclick = function (e) {
-      // Function to display the side panel with hotspot-specific image
       function showHotspotSidePanel(hotspotId) {
-        // Define images for each hotspot ID
         const hotspotImages = {
           hotspot1: "./blueprints/1.jpeg", // Replace with your URLs
           hotspot2: "./blueprints/1.jpeg",
           hotspot3: "./blueprints/1.jpeg",
         };
 
-        // Get the specific image or a default one if no match
         const imageSrc = hotspotImages[hotspotId] || "./blueprints/1.jpeg";
 
-        // Check if the side panel already exists, and remove it if so
         const existingPanel = document.getElementById("hotspot_sidepanel");
         const existingOverlay = document.getElementById("sidepanel_overlay");
         if (existingPanel) existingPanel.remove();
         if (existingOverlay) existingOverlay.remove();
-        // Create the side panel container
+
         const sidePanel = document.createElement("div");
         sidePanel.id = "hotspot_sidepanel";
         sidePanel.style.position = "fixed";
         sidePanel.style.borderRadius = "20px";
         sidePanel.style.top = "1rem";
-        sidePanel.style.left = "1rem"; // Adjusted to appear on the right
+        sidePanel.style.left = "1rem";
         sidePanel.style.width = "350px";
         sidePanel.style.height = "70%";
-        sidePanel.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Semi-transparent black
-        sidePanel.style.backdropFilter = "blur(50px)"; // Add blur to the panel background
+        sidePanel.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        sidePanel.style.backdropFilter = "blur(50px)";
         sidePanel.style.color = "#ffffff";
         sidePanel.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
         sidePanel.style.padding = "20px";
         sidePanel.style.borderLeft = "1px solid #ccc";
         sidePanel.style.overflowY = "auto";
-        sidePanel.style.transform = "translateX(100%)"; // Initially hidden
+        sidePanel.style.transform = "translateX(100%)";
         sidePanel.style.transition = "transform 0.3s ease-in-out";
-        sidePanel.style.zIndex = "1000"; // Ensure it's above other content
+        sidePanel.style.zIndex = "1000";
 
-        // Add content to the side panel
         sidePanel.innerHTML = `
     <h2>Hotspot Clicked</h2>
     <p>You clicked on the hotspot: <strong>${hotspotId}</strong></p>
@@ -3546,28 +3541,22 @@ function pano2vrSkin(player, base) {
     ">Close</button>
   `;
 
-        // Append the side panel to the document body
         document.body.appendChild(sidePanel);
 
-        // Slide the side panel into view
         setTimeout(() => {
           sidePanel.style.transform = "translateX(0)";
         }, 10);
 
-        // Add event listener to the close button
         const closeButton = sidePanel.querySelector("#closeSidePanel");
         closeButton.addEventListener("click", closeSidePanel);
         function closeSidePanel() {
-          sidePanel.style.transform = "translateX(100%)"; // Slide it out
+          sidePanel.style.transform = "translateX(100%)";
           setTimeout(() => {
-            sidePanel.remove(); // Remove from DOM after animation
+            sidePanel.remove();
           }, 300);
         }
       }
 
-      // Example: Replace with actual hotspot object
-
-      // Call the function to display the side panel
       showHotspotSidePanel(me.hotspot.id);
 
       player.openUrl(me.hotspot.url, me.hotspot.target);
